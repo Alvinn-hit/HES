@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login">
     <el-row>
       <el-col :span="8" :offset="8">
         <el-card class="login-body" shadow="hover">
@@ -53,7 +53,16 @@ export default class HelloWorld extends Vue {
 
 
 <style scoped>
+.login {
+  background-image: url('../assets/banner.png');
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
 .login-body {
-  margin-top: 30%;
+  width: 500px;
+  margin-top: 40%;
 }
 </style>
