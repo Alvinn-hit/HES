@@ -1,11 +1,11 @@
 <template>
 <div>
   <el-card>
-    <el-form ref="form" :model="form" label-width="80px">
-      <el-form-item label="姓名">
+    <el-form ref="form" :rules="userRules" :model="form" label-width="80px">
+      <el-form-item label="姓名" prop="name">
         <el-input v-model="form.name"></el-input>
       </el-form-item>
-      <el-form-item label="电话">
+      <el-form-item label="电话" prop="phone">
         <el-input v-model="form.phone"></el-input>
       </el-form-item>
       <el-form-item label="密码">
@@ -13,7 +13,7 @@
           <el-input type="password" v-model="form.password" placeholder="请输入登录密码"></el-input>
         </el-col>
         <el-col :span="11" :offset="2">
-          <el-input type="password" v-model="form.password" placeholder="请输入重复密码"></el-input>
+          <el-input type="password" v-model="form.repassword" placeholder="请输入重复密码"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="调查时间">
@@ -38,23 +38,64 @@
 </div>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import { create } from 'domain';
-export default class UserForm extends Vue {
-  @Prop({ default: (viid:object) => {
-    name: '',
-    phone: '',
-    password: '',
-    repassword: '',
-    begin_at: '',
-    end_at: '',
-    is_able: true,
-  }})
-  form: any
-
-  created () {
-    console.log(this.$props)
+<script>
+export default {
+  props: {
+    form: {
+      type: [Object, Array],
+      default: () => {
+        return {
+          name: '',
+          phone: '',
+          password: '',
+          repassword: '',
+          begin_at: '',
+          end_at: '',
+          is_able: true,
+        }
+      }
+    },
+    action: {
+      type: String,
+      default: 'add'
+    }
+  },
+  data () {
+    return {
+      userRules: {
+        name: [
+          { required: true, message: '姓名不能为空', trigger: 'blur' }
+        ],
+        phone: [
+          { required: true, message: '手机号码不能为空', trigger: 'blur' },
+          { pattern: '^[1][3,4,5,7,8,9][0-9]{9}$', message: '请输入正确的手机号', trigger: 'blur' }
+        ]
+      }
+    }
+  },
+  methods: {
+    onSubmit () {
+      if (this.checkPassword()) {
+        this.$refs['form'].validate((valid) => {
+          if (valid) {
+            
+          }
+        })
+      }
+    },
+    checkPassword () {
+      if (this.form.password) {
+        if (this.form.password !== this.form.repassword) {
+          this.$message.error('两次密码不一致');
+          return false;
+        }
+      } else if (this.action === 'add') {
+        this.$message.error('请输入密码');
+        return false;
+      }
+      return true
+    }
   }
 }
 </script>
+
