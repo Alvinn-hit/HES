@@ -12,6 +12,20 @@ const router = new Router({
       component: () => import('../pages/login.vue'),
       meta: { title: 'login' },
     },
+    {
+      path: '/',
+      component: () => import('../pages/layout.vue'),
+    },
+    {
+      path: '/user',
+      component: () => import('../pages/layout.vue'),
+      children: [
+        {
+          path: 'list',
+          component: () => import('../pages/user/index.vue'),
+        },
+      ],
+    },
     { path: '*', component: () => import('../components/NotFound.vue') },
   ],
 });
