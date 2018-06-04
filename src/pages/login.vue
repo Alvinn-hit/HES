@@ -25,6 +25,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { login } from '@/api/login';
 @Component
 export default class HelloWorld extends Vue {
   loginForm: object = {
@@ -45,7 +46,14 @@ export default class HelloWorld extends Vue {
   onSubmit () :void {
     this.$refs['loginForm'].validate((valid:boolean) => {
       if (!valid) return false;
-      this.$router.push({path: '/'});
+      login(this.loginForm).then(res => {
+        console.log(res);
+        sessionStorage.setItem('user', JSON.stringify(res));
+        sessionStorage.setItem('token', res.token);
+
+        this.$router.push({path: '/'});
+      })
+      
     });
   }
 }

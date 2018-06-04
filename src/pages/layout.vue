@@ -27,12 +27,12 @@
             HSE联系点问题整改管理系统
           </div>
           <div class="header-right">
-            <img src="../assets/logo.jpg" class="user-img"/>
-            <el-dropdown class="user-info">
-              <span>张三<i class="el-icon-arrow-down el-icon--right"></i></span>
+            <img :src="user.avatar ? user.avatar : '../assets/logo.jpg'" class="user-img"/>
+            <el-dropdown class="user-info"  @command="handleClick">
+              <span>{{ user.name }}<i class="el-icon-arrow-down el-icon--right"></i></span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>修改密码</el-dropdown-item>
-                <el-dropdown-item divided>退出登录</el-dropdown-item>
+                <el-dropdown-item command="updatePassword">修改密码</el-dropdown-item>
+                <el-dropdown-item divided command="loginOut">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -56,9 +56,39 @@
     </el-container>
   </el-container>
 
-
+  <el-dialog title="修改密码" :visible.sync="changePassword">
+    <password v-if="changePassword" @success="changed"/>
+  </el-dialog>
 </div>
 </template>
+
+<script>
+import Password from '@/components/user/password';
+export default {
+  components: { Password },
+  data () {
+    return {
+      user: JSON.parse(sessionStorage.getItem('user')),
+      changePassword: false
+    }
+  },
+  methods: {
+    handleClick (command) {
+      if (command === 'loginOut') {
+        sessionStorage.clear();
+        this.$router.push({ path: '/login' });
+      } else if (command === 'updatePassword') {
+        this.changePassword = true
+      }
+    },
+    changed () {
+      this.changePassword = false;
+    }
+  }
+}
+</script>
+
+
 
 
 <style scoped>

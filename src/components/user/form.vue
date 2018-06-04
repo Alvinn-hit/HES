@@ -8,7 +8,7 @@
       <el-form-item label="电话" prop="phone">
         <el-input v-model="form.phone"></el-input>
       </el-form-item>
-      <el-form-item label="密码">
+      <el-form-item label="密码" v-if="actionType === 'add'">
         <el-col :span="11">
           <el-input type="password" v-model="form.password" placeholder="请输入登录密码"></el-input>
         </el-col>
@@ -30,8 +30,9 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">立即创建</el-button>
-        <el-button>取消</el-button>
+        <el-button type="primary" @click="onSubmit" v-if="actionType === 'add'">立即创建</el-button>
+        <el-button type="primary" @click="onUpdate" v-if="actionType === 'edit'">修改</el-button>
+        <el-button @click="$emit('cancel')">取消</el-button>
       </el-form-item>
     </el-form>
   </el-card>
@@ -39,6 +40,7 @@
 </template>
 
 <script>
+import { userAdd, userUpdate } from '@/api/user'
 export default {
   props: {
     form: {
@@ -55,7 +57,7 @@ export default {
         }
       }
     },
-    action: {
+    actionType: {
       type: String,
       default: 'add'
     }
@@ -78,7 +80,10 @@ export default {
       if (this.checkPassword()) {
         this.$refs['form'].validate((valid) => {
           if (valid) {
-            
+            userAdd(this.form).then(res => {
+              this.$message.success(this.form.name + ' 增加成功');
+              this.$emit('success');
+            })
           }
         })
       }
@@ -94,6 +99,12 @@ export default {
         return false;
       }
       return true
+    },
+    onUpdate() {
+      userUpdate(this.form.id, this.form).then(res => {
+        this.$message.success('修改成功');
+        this.$emit('success');
+      })
     }
   }
 }

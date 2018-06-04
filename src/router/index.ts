@@ -26,6 +26,16 @@ const router = new Router({
         },
       ],
     },
+    {
+      path: '/category',
+      component: () => import('../pages/layout.vue'),
+      children: [
+        {
+          path: 'law',
+          component: () => import('../pages/category/law.vue'),
+        },
+      ],
+    },
     { path: '*', component: () => import('../components/NotFound.vue') },
   ],
 });
