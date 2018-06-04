@@ -36,6 +36,16 @@ const router = new Router({
         },
       ],
     },
+    {
+      path: '/content',
+      component: () => import('../pages/layout.vue'),
+      children: [
+        {
+          path: ':id',
+          component: () => import('../pages/content/index.vue'),
+        },
+      ],
+    },
     { path: '*', component: () => import('../components/NotFound.vue') },
   ],
 });
@@ -45,7 +55,7 @@ router.beforeEach((to, from, next) => {
   next();
 });
 
-router.afterEach(()=> {
+router.afterEach(() => {
   Nprogress.done();
 });
 

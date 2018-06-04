@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import UserForm from '@/components/user/form.vue';
 import { userList } from '@/api/user';
 @Component({

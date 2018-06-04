@@ -1,6 +1,6 @@
 <template>
 <div>
-  <category-table cate="123"/>
+  <category-table cate="10"/>
 </div>
 </template>
 
