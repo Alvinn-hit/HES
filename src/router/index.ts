@@ -52,7 +52,20 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   Nprogress.start();
-  next();
+  const token = sessionStorage.getItem('token');
+  if (token) {
+    if (to.path === '/login') {
+      next({path: '/'});
+    } else {
+      next();
+    }
+  } else {
+    if (to.path === '/login') {
+      next();
+    } else {
+      next({path: '/login'});
+    }
+  }
 });
 
 router.afterEach(() => {
