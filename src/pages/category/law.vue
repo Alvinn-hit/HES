@@ -1,17 +1,25 @@
 <template>
 <div>
-  <category-table cate="10"/>
+  <category-table :cate="data"/>
 </div>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+<script>
 import CategoryTable from '@/components/category/table.vue';
-
-@Component({
-  components: { CategoryTable }
-})
-export default class Law extends Vue {
-
+export default {
+  components: { CategoryTable },
+  data () {
+    return {
+      data: this.$route.params.id
+    }
+  },
+  watch: {
+    '$route': function (val, old) {
+      
+      this.data = val.params.id;
+      console.log(this.data)
+    }
+  }
 }
 </script>
+

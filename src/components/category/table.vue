@@ -1,7 +1,7 @@
 <template>
 <div>
   <el-row class="row">
-    <el-button @click="onAddCate">增加一级分类</el-button>
+    <el-button @click="onAddCate('0')">增加一级分类</el-button>
   </el-row>
   <el-tree :data="list" :props="treeData" node-key="id" :expand-on-click-node="false" default-expand-all>
     <span class="custom-tree-node" slot-scope="{node, data}">
@@ -46,19 +46,25 @@ export default Vue.extend({
       addCateBox: false,
       editCateBox: false,
       selectedCate: [],
-      p_id: 0
+      p_id: "0"
     }
   },
   created () {
     this.getCategoryList();
   },
+  watch: {
+    "$route": function (val, old) {
+      this.getCategoryList();
+    }
+  },
   methods: {
     getCategoryList() {
-      categoryList({}).then(res => {
+      categoryList({type: this.cate}).then(res => {
         this.list = res
       })
     },
-    onAddCate (pid = 0) {
+    onAddCate (pid = "0") {
+      console.log(pid);
       this.p_id = pid;
       this.addCateBox = true;
     },

@@ -1,9 +1,13 @@
 import Axios from 'axios';
+import QS from 'qs';
 import { Message } from 'element-ui';
 
 const service = Axios.create({
   baseURL: 'http://danger.test/api/v1/',
   timeout: 5000,
+  paramsSerializer(params) {
+    return QS.stringify(params, { skipNulls: true })
+  }
 });
 
 service.interceptors.request.use((config) => {

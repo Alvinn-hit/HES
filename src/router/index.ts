@@ -31,7 +31,7 @@ const router = new Router({
       component: () => import('../pages/layout.vue'),
       children: [
         {
-          path: 'law',
+          path: ':id',
           component: () => import('../pages/category/law.vue'),
         },
       ],

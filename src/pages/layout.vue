@@ -2,22 +2,70 @@
 <div>
   <el-container>
     <el-aside style="width:300px;">
-      <el-menu class="aside">
+      <el-menu class="aside" router>
 
         <el-card class="menu-card">
           <img src="../assets/logo.jpg" class="side-img"/>
         </el-card>
 
         <span class="subTitle">用户管理</span>
-        <el-menu-item index="user">
+        <el-menu-item index="/user/list">
           <i class="el-icon-menu"></i>
           <span slot="title">用户管理</span>
         </el-menu-item>
+
         <span class="subTitle">分类管理</span>
-        <el-menu-item index="cate">
+        <el-menu-item index="/category/10">
           <i class="el-icon-menu"></i>
-          <span slot="title">分类管理</span>
+          <span slot="title">法律法规</span>
         </el-menu-item>
+        <el-menu-item index="/category/20">
+          <i class="el-icon-menu"></i>
+          <span slot="title">体系要素</span>
+        </el-menu-item>
+        <el-menu-item index="/category/30">
+          <i class="el-icon-menu"></i>
+          <span slot="title">隐患分级标准</span>
+        </el-menu-item>
+        <el-menu-item index="/category/40">
+          <i class="el-icon-menu"></i>
+          <span slot="title">违章分级标准</span>
+        </el-menu-item>
+        <el-menu-item index="/category/60">
+          <i class="el-icon-menu"></i>
+          <span slot="title">内审类别</span>
+        </el-menu-item>
+        <el-menu-item index="/category/50">
+          <i class="el-icon-menu"></i>
+          <span slot="title">整改措施建议参考</span>
+        </el-menu-item>
+
+        <span class="subTitle">内容管理</span>
+        <el-menu-item index="/content/10">
+          <i class="el-icon-menu"></i>
+          <span slot="title">法律法规</span>
+        </el-menu-item>
+        <el-menu-item index="/content/20">
+          <i class="el-icon-menu"></i>
+          <span slot="title">体系要素</span>
+        </el-menu-item>
+        <el-menu-item index="/content/30">
+          <i class="el-icon-menu"></i>
+          <span slot="title">隐患分级标准</span>
+        </el-menu-item>
+        <el-menu-item index="/content/40">
+          <i class="el-icon-menu"></i>
+          <span slot="title">违章分级标准</span>
+        </el-menu-item>
+        <el-menu-item index="/content/60">
+          <i class="el-icon-menu"></i>
+          <span slot="title">内审类别</span>
+        </el-menu-item>
+        <el-menu-item index="/content/50">
+          <i class="el-icon-menu"></i>
+          <span slot="title">整改措施建议参考</span>
+        </el-menu-item>
+
       </el-menu>
     </el-aside>
     <el-container style="height:100vh;">
@@ -96,12 +144,13 @@ export default {
   position: fixed;
   width: 300px;
   height: 100%;
+  overflow-y: scroll;
 }
 .subTitle {
   font-size: 12px;
   display: block;
   text-align: left;
-  padding: 0 111px;
+  padding: 0 20px;
   color: #999;
 }
 
@@ -109,7 +158,7 @@ export default {
   padding: 0;
 }
 .header-card {
-  background: #26a69a;
+  background: #b71c1c;
   border: none;
   height: 60px;
   padding: 0;
@@ -125,8 +174,8 @@ export default {
 }
 .title { text-align: left; font-size: 18px;color: white;}
 .user-img {width: 50px; height: 50px; border-radius: 50%;}
-.user-info {float: right; margin-right: 30px; line-height: 50px;}
-.main { background: #e0f2f1; width: 100%;}
+.user-info {float: right; margin-right: 30px; line-height: 50px; color: white}
+.main { background: #fff3e0; width: 100%;}
 .main-body { width: 100%; margin-top: 5px; height: calc(100vh - 170px); overflow-y: scroll;}
 .body {width: 100%; height: 100%; display: block; text-align: left;}
 .menu-card{
@@ -135,5 +184,8 @@ export default {
 
 .side-img {
   max-width: 300px;
+}
+.el-menu-item {
+  text-align: left;
 }
 </style>

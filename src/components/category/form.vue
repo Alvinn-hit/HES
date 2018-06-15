@@ -1,6 +1,6 @@
 <template>
   <el-card>
-    <el-form ref="cate" rules="cateRules" :model="form" label-width="100px">
+    <el-form ref="cate" :rules="cateRules" :model="form" label-width="100px">
       <el-form-item label="名称" prop="title">
         <el-input v-model="form.title" />
       </el-form-item>
@@ -39,6 +39,15 @@ export default {
     cate: {
       type: String,
       default: "10"
+    }
+  },
+  data () {
+    return {
+      cateRules: {
+        title: [
+          { required: true, message: '分类名称不能为空', trigger: 'blur' }
+        ]
+      }
     }
   },
   methods: {
