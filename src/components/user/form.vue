@@ -8,14 +8,14 @@
       <el-form-item label="电话" prop="phone">
         <el-input v-model="form.phone"></el-input>
       </el-form-item>
-      <el-form-item label="密码" v-if="actionType === 'add'">
+      <!-- <el-form-item label="密码" v-if="actionType === 'add'">
         <el-col :span="11">
           <el-input type="password" v-model="form.password" placeholder="请输入登录密码"></el-input>
         </el-col>
         <el-col :span="11" :offset="2">
           <el-input type="password" v-model="form.repassword" placeholder="请输入重复密码"></el-input>
         </el-col>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="调查时间">
         <el-col :span="11">
           <el-date-picker type="date" placeholder="选择调查时间" v-model="form.begin_at" style="width: 100%;"></el-date-picker>
@@ -49,7 +49,7 @@ export default {
         return {
           name: '',
           phone: '',
-          password: '',
+          password: '123456',
           repassword: '',
           begin_at: '',
           end_at: '',
@@ -89,15 +89,15 @@ export default {
       }
     },
     checkPassword () {
-      if (this.form.password) {
-        if (this.form.password !== this.form.repassword) {
-          this.$message.error('两次密码不一致');
-          return false;
-        }
-      } else if (this.action === 'add') {
-        this.$message.error('请输入密码');
-        return false;
-      }
+      // if (this.form.password) {
+      //   if (this.form.password !== this.form.repassword) {
+      //     this.$message.error('两次密码不一致');
+      //     return false;
+      //   }
+      // } else if (this.action === 'add') {
+      //   this.$message.error('请输入密码');
+      //   return false;
+      // }
       return true
     },
     onUpdate() {

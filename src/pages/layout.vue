@@ -10,7 +10,7 @@
 
         <span class="subTitle">用户管理</span>
         <el-menu-item index="/user/list">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-news"></i>
           <span slot="title">用户管理</span>
         </el-menu-item>
 
@@ -42,27 +42,27 @@
 
         <span class="subTitle">内容管理</span>
         <el-menu-item index="/content/10">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-document"></i>
           <span slot="title">法律法规</span>
         </el-menu-item>
         <el-menu-item index="/content/20">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-document"></i>
           <span slot="title">体系要素</span>
         </el-menu-item>
         <el-menu-item index="/content/30">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-document"></i>
           <span slot="title">隐患分级标准</span>
         </el-menu-item>
         <el-menu-item index="/content/40">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-document"></i>
           <span slot="title">违章分级标准</span>
         </el-menu-item>
         <el-menu-item index="/content/60">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-document"></i>
           <span slot="title">内审类别</span>
         </el-menu-item>
         <el-menu-item index="/content/50">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-document"></i>
           <span slot="title">整改措施建议参考</span>
         </el-menu-item>
 
@@ -75,7 +75,7 @@
             HSE联系点问题整改管理系统
           </div>
           <div class="header-right">
-            <img :src="user.avatar ? user.avatar : '../assets/logo.jpg'" class="user-img"/>
+            <img :src="user.avatar ? user.avatar : '/images/user.png'" class="user-img"/>
             <el-dropdown class="user-info"  @command="handleClick">
               <span>{{ user.name }}<i class="el-icon-arrow-down el-icon--right"></i></span>
               <el-dropdown-menu slot="dropdown">
@@ -90,9 +90,7 @@
         <el-card>
           <el-breadcrumb separator-class="el-icon-arrow-right">
               <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-              <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-              <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-              <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+              <el-breadcrumb-item>{{path.meta.name}}</el-breadcrumb-item>
             </el-breadcrumb>
         </el-card>
         <el-card class="main-body">
@@ -117,7 +115,13 @@ export default {
   data () {
     return {
       user: JSON.parse(sessionStorage.getItem('user')),
-      changePassword: false
+      changePassword: false,
+      path: this.$route
+    }
+  },
+  watch: {
+    "$route": function (val, old) {
+      this.path = val;
     }
   },
   methods: {
@@ -170,11 +174,10 @@ export default {
   right: 30px;
   top: 5px;
   position: absolute;
-  
 }
 .title { text-align: left; font-size: 18px;color: white;}
-.user-img {width: 50px; height: 50px; border-radius: 50%;}
-.user-info {float: right; margin-right: 30px; line-height: 50px; color: white}
+.user-img {max-width: 50px; max-height: 50px; border-radius: 50%; float: left;}
+.user-info {float: right; line-height: 50px; color: white}
 .main { background: #fff3e0; width: 100%;}
 .main-body { width: 100%; margin-top: 5px; height: calc(100vh - 170px); overflow-y: scroll;}
 .body {width: 100%; height: 100%; display: block; text-align: left;}

@@ -15,6 +15,7 @@ const router = new Router({
     {
       path: '/',
       component: () => import('../pages/layout.vue'),
+      meta: {name: '主页'},
     },
     {
       path: '/user',
@@ -23,6 +24,7 @@ const router = new Router({
         {
           path: 'list',
           component: () => import('../pages/user/index.vue'),
+          meta: {name: '用户管理'},
         },
       ],
     },
@@ -33,6 +35,7 @@ const router = new Router({
         {
           path: ':id',
           component: () => import('../pages/category/law.vue'),
+          meta: {name: '类别管理'},
         },
       ],
     },
@@ -43,6 +46,7 @@ const router = new Router({
         {
           path: ':id',
           component: () => import('../pages/content/index.vue'),
+          meta: {name: '内容管理'},
         },
       ],
     },
