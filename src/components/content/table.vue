@@ -17,9 +17,8 @@
     </el-table>
 
     <el-pagination
-      @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page.sync="currentPage1"
+      :current-page.sync="page"
       :page-size="range"
       layout="total, prev, pager, next"
       :total="total">
@@ -108,6 +107,10 @@ export default {
       this.addContentBox = false;
       this.editContentBox = false;
       this.getList();
+    },
+    handleCurrentChange(val) {
+      this.page = val
+      this.getList()
     }
   }
 }

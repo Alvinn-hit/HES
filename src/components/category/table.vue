@@ -3,16 +3,17 @@
   <el-row class="row">
     <el-button @click="onAddCate('0')">增加一级分类</el-button>
   </el-row>
-  <el-table :data="list" style="width:100%;">
+  <!--<el-table :data="list" style="width:100%;">
     <el-table-column prop="title" label="分类名称"></el-table-column>
     <el-table-column label="操作" width="200">
       <template slot-scope="scope">
+        <el-button size="mini" type="text" @click="onAddCate(scope.row.id)">增加下级分类</el-button>
         <el-button size="mini" type="text" style="color: #e6a23c" @click="onEditCate(scope.row)">修改</el-button>
         <el-button size="mini" type="text" style="color:red" @click="onDeleteCate(scope.row.id)">删除</el-button>
       </template>
     </el-table-column>
-  </el-table>
-  <!-- <el-tree :data="list" :props="treeData" node-key="id" :expand-on-click-node="false" default-expand-all>
+  </el-table>-->
+  <el-tree :data="list" :props="treeData" node-key="id" :expand-on-click-node="false" default-expand-all>
     <span class="custom-tree-node" slot-scope="{node, data}">
       <span>{{data.title}}</span>
       <span class="tree-right">
@@ -21,7 +22,7 @@
         <el-button size="mini" type="text" style="color:red" @click="onDeleteCate(data.id)">删除</el-button>
       </span>
     </span>
-  </el-tree> -->
+  </el-tree>
 
   <el-dialog :visible.sync="addCateBox" title="增加分类">
     <cate-form action-type="add" :cate="cate" :pid="p_id" v-if="addCateBox" @success="reload"/>
